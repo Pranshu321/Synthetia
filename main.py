@@ -1,10 +1,6 @@
-from keras.models import load_model
 import streamlit as st
-import tensorflow as tf
-from PIL import Image
 from ImageModel import index
 from AudioModel import index as audio_index
-import io
 
 # Load the model
 
