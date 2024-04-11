@@ -41,9 +41,10 @@ def predict_image():
     if option == "VGG":
         model = load_model('ImageModel\VGG_2.h5')
     elif option == "ResNet":
-        model = load_model('ResNet_2.h5')
-    elif option == "Inceptionnet":
-        model = load_model('InceptionNet_2.h5')
+        model = load_model('ImageModel\Resnet.keras')
+        print(model.summary())
+    if option == "Inceptionnet":
+        model = load_model('ImageModel\ICV3.keras')
 
     uploaded_file = st.file_uploader(
         'Choose an image to upload…', type=["jpg", "jpeg"])
