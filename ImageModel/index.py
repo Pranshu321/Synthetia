@@ -1,6 +1,7 @@
 from keras.models import load_model
 import streamlit as st
 import tensorflow as tf
+import keras
 from PIL import Image
 import io
 
@@ -41,10 +42,12 @@ def predict_image():
     if option == "VGG":
         model = load_model('ImageModel\VGG_2.h5')
     elif option == "ResNet":
-        model = load_model('ImageModel\Resnet.keras')
+        # model = keras.saving.load_model('ImageModel\Resnet.keras')
+        model = load_model('ImageModel\VGG_2.h5')
         print(model.summary())
     if option == "Inceptionnet":
-        model = load_model('ImageModel\ICV3.keras')
+        # model = load_model('ImageModel\ICV3.keras')
+        model = load_model('ImageModel\VGG_2.h5')
 
     uploaded_file = st.file_uploader(
         'Choose an image to upload…', type=["jpg", "jpeg"])
@@ -61,10 +64,9 @@ def predict_image():
             result = predict_the_output(image_bytes, model)
             if result[0][0] > 0.6:
                 st.success(
-                    'The image provided is original with a probability of {}'.format(result[0][0]))
+                    'The image provided is original')
             else:
-                st.error('The image provided is synthetic with a probability of {}'.format(
-                    result[0][0]))
+                st.error('The image provided is synthetic')
 
 
 # export the function
